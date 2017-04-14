@@ -7,30 +7,40 @@
     android:layout_margin="16dp"
     tools:context="br.pro.hashi.ensino.desagil.morse.SendActivity">
 
-    <!--Usado na próxima tela-->
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/text_number" />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_number"
+        android:id="@+id/textView"
+        android:layout_alignBaseline="@+id/numberEdit"
+        android:layout_alignBottom="@+id/numberEdit"
+        android:layout_alignParentStart="true" />
 
-    <!--<EditText android:id="@+id/numberEdit"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="fill_horizontal"-->
-        <!--android:inputType="phone" />-->
+    <EditText android:id="@+id/numberEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:inputType="phone"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/messageLabel" />
 
     <TextView
         android:id="@+id/messageLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_message" />
+        android:text="@string/text_message"
+        android:layout_alignBaseline="@+id/messageEdit"
+        android:layout_alignBottom="@+id/messageEdit"
+        android:layout_alignParentStart="true" />
 
     <EditText android:id="@+id/messageEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/button3"
+        android:layout_below="@+id/numberEdit"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
+        android:layout_marginTop="26dp"
+        android:layout_toEndOf="@+id/messageLabel" />
 
     <Button
         android:id="@+id/button"
@@ -41,7 +51,6 @@
         android:layout_marginBottom="13dp"
         android:background="@drawable/roundbutton"
         android:text="Toque" />
-    <!--android:onClick="sendMessage"-->
 
     <Button
         android:id="@+id/button2"
@@ -71,5 +80,6 @@
         android:layout_alignStart="@+id/button"
         android:layout_marginBottom="167dp"
         android:background="@drawable/roundbutton"
-        android:text="Enviar" />
+        android:text="Enviar"
+        android:onClick="sendMessage" />
 </RelativeLayout>
