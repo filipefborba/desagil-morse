@@ -20,27 +20,24 @@ public class SendActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send);
 
         messageEdit = (EditText) findViewById(R.id.messageEdit);
-        /*
-        Ainda não utilizado
         numberEdit = (EditText) findViewById(R.id.numberEdit);
-        */
     }
 
 
-//    public void sendMessage(View view) {
-//        SmsManager manager = SmsManager.getDefault();
-//
-//        String number = numberEdit.getText().toString();
-//        String message = messageEdit.getText().toString();
-//
-//        try {
-//            manager.sendTextMessage(number, null, message, null, null);
-//
-//            Toast toast = Toast.makeText(this, "Message sent to number!", Toast.LENGTH_SHORT);
-//            toast.show();
-//        }
-//        catch(IllegalArgumentException exception) {
-//            Log.e("SendActivity", "number or message empty");
-//        }
-//    }
+    public void sendMessage(View view) {
+        SmsManager manager = SmsManager.getDefault();
+
+        String number = numberEdit.getText().toString();
+        String message = messageEdit.getText().toString();
+
+        try {
+            manager.sendTextMessage(number, null, message, null, null);
+
+            Toast toast = Toast.makeText(this, "Message sent to number!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        catch(IllegalArgumentException exception) {
+            Log.e("SendActivity", "number or message empty");
+        }
+    }
 }
