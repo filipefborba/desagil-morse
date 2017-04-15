@@ -82,4 +82,5 @@
         android:background="@drawable/roundbutton"
         android:text="Enviar"
         android:onClick="sendMessage" />
+
 </RelativeLayout>
