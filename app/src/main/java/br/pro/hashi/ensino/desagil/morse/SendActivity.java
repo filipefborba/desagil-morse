@@ -31,20 +31,25 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_send);
 
         messageEdit = (EditText) findViewById(R.id.messageEdit);
+        numberEdit = (EditText) findViewById(R.id.numberEdit);
 
 
         Button button_ready = (Button) findViewById(R.id.button4);
-        Button button2 = (Button) findViewById(R.id.button2);
         button_ready.setOnClickListener(this);
-        button2.setOnClickListener(this);
 
 
 
     }
 
     public void onClick(View v) {
-        String str = messageEdit.getText().toString();
-        System.out.println(str);
+        String text_message = new String();
+        text_message = "bolo";
+        String text_number = new String();
+        text_number = "19999108810";
+
+        messageEdit.setText(text_message);
+        numberEdit.setText(text_number);
+
 
         // Sua Ação
 
