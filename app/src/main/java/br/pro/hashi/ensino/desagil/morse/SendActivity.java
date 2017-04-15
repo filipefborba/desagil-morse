@@ -40,4 +40,5 @@ public class SendActivity extends AppCompatActivity {
             Log.e("SendActivity", "number or message empty");
         }
     }
+
 }
