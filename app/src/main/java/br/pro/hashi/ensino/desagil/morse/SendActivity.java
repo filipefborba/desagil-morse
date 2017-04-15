@@ -63,6 +63,4 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             Log.e("SendActivity", "number or message empty");
         }
     }
-
-
 }
