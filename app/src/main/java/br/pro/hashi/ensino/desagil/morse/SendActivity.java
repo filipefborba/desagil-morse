@@ -1,26 +1,15 @@
 package br.pro.hashi.ensino.desagil.morse;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
-import static br.pro.hashi.ensino.desagil.morse.R.id.button;
-import static br.pro.hashi.ensino.desagil.morse.R.id.button4;
 
-
-public class SendActivity extends AppCompatActivity implements View.OnClickListener {
+public class SendActivity extends AppCompatActivity {
     private EditText numberEdit;
     private EditText messageEdit;
 
@@ -32,6 +21,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
         messageEdit = (EditText) findViewById(R.id.messageEdit);
         numberEdit = (EditText) findViewById(R.id.numberEdit);
+<<<<<<< HEAD
 
 
         Button button_ready = (Button) findViewById(R.id.button4);
@@ -56,6 +46,10 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+=======
+    }
+
+>>>>>>> f691cd67384717b2763840c8882f1794b796b5a0
 
     public void sendMessage(View view) {
         SmsManager manager = SmsManager.getDefault();
@@ -68,10 +62,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
             Toast toast = Toast.makeText(this, "Message sent to number!", Toast.LENGTH_SHORT);
             toast.show();
-        } catch (IllegalArgumentException exception) {
+        }
+        catch(IllegalArgumentException exception) {
             Log.e("SendActivity", "number or message empty");
         }
     }
-
-
 }
