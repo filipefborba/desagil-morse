@@ -34,13 +34,17 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
 
         Button button_ready = (Button) findViewById(R.id.button4);
+        Button button2 = (Button) findViewById(R.id.button2);
         button_ready.setOnClickListener(this);
+        button2.setOnClickListener(this);
+
 
 
     }
 
     public void onClick(View v) {
-        Toast.makeText(this, "Clicked on Button", Toast.LENGTH_LONG).show();
+        String str = messageEdit.getText().toString();
+        System.out.println(str);
 
         // Sua Ação
 
