@@ -5,13 +5,28 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 
-public class SendActivity extends AppCompatActivity {
+public class SendActivity extends AppCompatActivity implements View.OnClickListener {
+
     private EditText numberEdit;
     private EditText messageEdit;
+    private ScrollView ready;
+    private ImageButton morse;
+    private Button button2;
+    private Button button3;
+    private Button button4;
+    private Button button5;
+    private Button button6;
+    public ImageButton button_ready;
+    public String caregiver_number;
+
+
 
 
     @Override
@@ -19,37 +34,112 @@ public class SendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
 
+
+        caregiver_number = "111111111";
+
         messageEdit = (EditText) findViewById(R.id.messageEdit);
         numberEdit = (EditText) findViewById(R.id.numberEdit);
-<<<<<<< HEAD
+        ready = (ScrollView) findViewById(R.id.scroll);
 
+        button_ready = (ImageButton) findViewById(R.id.readytext);
+        morse = (ImageButton) findViewById(R.id.morse);
+        button_ready.setOnClickListener((View.OnClickListener) this);
+        //botoes de mensagens prontas
+        button2 = (Button) findViewById(R.id.button2);
+        button3= (Button) findViewById(R.id.button3);
+        button4= (Button) findViewById(R.id.button4);
+        button5= (Button) findViewById(R.id.button5);
+        button6= (Button) findViewById(R.id.button6);
+        button6.setOnClickListener((View.OnClickListener) this);
+        button5.setOnClickListener((View.OnClickListener) this);
+        button4.setOnClickListener((View.OnClickListener) this);
+        button3.setOnClickListener((View.OnClickListener) this);
+        button2.setOnClickListener((View.OnClickListener) this);
 
-        Button button_ready = (Button) findViewById(R.id.button4);
-        button_ready.setOnClickListener(this);
 
 
 
     }
 
     public void onClick(View v) {
-        String text_message = new String();
-        text_message = "bolo";
-        String text_number = new String();
-        text_number = "19999108810";
+        ready.setVisibility(View.VISIBLE);
+        morse.setVisibility(View.INVISIBLE);
+        switch (v.getId()) {
+            case  R.id.button2: {
+                String text_message = button2.getText().toString();
+                String text_number = caregiver_number;
+                ;
 
-        messageEdit.setText(text_message);
-        numberEdit.setText(text_number);
+                messageEdit.setText(text_message);
+                numberEdit.setText(text_number);
+                // do something for button 1 click
+                break;
+            }
+            case  R.id.button3: {
+                String text_message = button3.getText().toString();
+                String text_number = caregiver_number;
+                ;
+
+                messageEdit.setText(text_message);
+                numberEdit.setText(text_number);
+                // do something for button 1 click
+                break;
+
+
+            }
+            case  R.id.button4: {
+                String text_message = button4.getText().toString();
+                String text_number = caregiver_number;
+                ;
+
+                messageEdit.setText(text_message);
+                numberEdit.setText(text_number);
+                // do something for button 1 click
+                break;
+
+
+            }
+            case  R.id.button5: {
+                String text_message = button5.getText().toString();
+                String text_number = caregiver_number;
+                ;
+
+                messageEdit.setText(text_message);
+                numberEdit.setText(text_number);
+                // do something for button 1 click
+                break;
+
+
+            }
+            case  R.id.button6: {
+                String text_message = button6.getText().toString();
+                String text_number = caregiver_number;
+                ;
+
+                messageEdit.setText(text_message);
+                numberEdit.setText(text_number);
+                // do something for button 1 click
+                break;
+
+
+            }
+
+
+
+
+
+
+
 
 
         // Sua Ação
 
     }
-
-
-=======
     }
 
->>>>>>> f691cd67384717b2763840c8882f1794b796b5a0
+
+
+
 
     public void sendMessage(View view) {
         SmsManager manager = SmsManager.getDefault();
