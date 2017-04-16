@@ -27,8 +27,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     public String caregiver_number;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +55,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         button2.setOnClickListener((View.OnClickListener) this);
 
 
-
-
     }
 
     public void onClick(View v) {
@@ -69,8 +65,10 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 String text_message = button2.getText().toString();
                 String text_number = caregiver_number;
                 ;
+                ready.setVisibility(View.INVISIBLE);
+                morse.setVisibility(View.VISIBLE);
 
-                messageEdit.setText(text_message);
+                messageEdit.append(text_message);
                 numberEdit.setText(text_number);
                 // do something for button 1 click
                 break;
@@ -79,8 +77,10 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 String text_message = button3.getText().toString();
                 String text_number = caregiver_number;
                 ;
+                ready.setVisibility(View.INVISIBLE);
+                morse.setVisibility(View.VISIBLE);
 
-                messageEdit.setText(text_message);
+                messageEdit.append(text_message);
                 numberEdit.setText(text_number);
                 // do something for button 1 click
                 break;
@@ -91,8 +91,10 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 String text_message = button4.getText().toString();
                 String text_number = caregiver_number;
                 ;
+                ready.setVisibility(View.INVISIBLE);
+                morse.setVisibility(View.VISIBLE);
 
-                messageEdit.setText(text_message);
+                messageEdit.append(text_message);
                 numberEdit.setText(text_number);
                 // do something for button 1 click
                 break;
@@ -103,8 +105,10 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 String text_message = button5.getText().toString();
                 String text_number = caregiver_number;
                 ;
+                ready.setVisibility(View.INVISIBLE);
+                morse.setVisibility(View.VISIBLE);
 
-                messageEdit.setText(text_message);
+                messageEdit.append(text_message);
                 numberEdit.setText(text_number);
                 // do something for button 1 click
                 break;
@@ -115,8 +119,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 String text_message = button6.getText().toString();
                 String text_number = caregiver_number;
                 ;
-
-                messageEdit.setText(text_message);
+                ready.setVisibility(View.INVISIBLE);
+                morse.setVisibility(View.VISIBLE);
+                messageEdit.append(text_message);
                 numberEdit.setText(text_number);
                 // do something for button 1 click
                 break;
@@ -124,22 +129,10 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
-
-
-
-
-
-
-
-
         // Sua Ação
 
     }
     }
-
-
-
-
 
     public void sendMessage(View view) {
         SmsManager manager = SmsManager.getDefault();
