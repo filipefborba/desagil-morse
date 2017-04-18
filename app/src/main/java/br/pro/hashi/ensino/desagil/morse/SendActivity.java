@@ -25,6 +25,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private Button button6;
     public ImageButton button_ready;
     public String caregiver_number;
+    private boolean turn;
 
 
     @Override
@@ -58,8 +59,16 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick(View v) {
-        ready.setVisibility(View.VISIBLE);
-        morse.setVisibility(View.INVISIBLE);
+        if (turn == false){
+            ready.setVisibility(View.VISIBLE);
+            morse.setVisibility(View.INVISIBLE);
+            turn = true;
+        }
+        else{
+            ready.setVisibility(View.INVISIBLE);
+            morse.setVisibility(View.VISIBLE);
+            turn = false;
+        }
         switch (v.getId()) {
             case  R.id.button2: {
                 String text_message = button2.getText().toString();
@@ -68,9 +77,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 ready.setVisibility(View.INVISIBLE);
                 morse.setVisibility(View.VISIBLE);
 
-                messageEdit.append(text_message);
+                messageEdit.setText(text_message);
                 numberEdit.setText(text_number);
-                // do something for button 1 click
+                // do something for button 2 click
                 break;
             }
             case  R.id.button3: {
@@ -80,9 +89,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 ready.setVisibility(View.INVISIBLE);
                 morse.setVisibility(View.VISIBLE);
 
-                messageEdit.append(text_message);
+                messageEdit.setText(text_message);
                 numberEdit.setText(text_number);
-                // do something for button 1 click
+                // do something for button 3 click
                 break;
 
 
@@ -94,9 +103,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 ready.setVisibility(View.INVISIBLE);
                 morse.setVisibility(View.VISIBLE);
 
-                messageEdit.append(text_message);
+                messageEdit.setText(text_message);
                 numberEdit.setText(text_number);
-                // do something for button 1 click
+                // do something for button 4 click
                 break;
 
 
@@ -108,9 +117,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 ready.setVisibility(View.INVISIBLE);
                 morse.setVisibility(View.VISIBLE);
 
-                messageEdit.append(text_message);
+                messageEdit.setText(text_message);
                 numberEdit.setText(text_number);
-                // do something for button 1 click
+                // do something for button 5 click
                 break;
 
 
@@ -121,15 +130,14 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 ;
                 ready.setVisibility(View.INVISIBLE);
                 morse.setVisibility(View.VISIBLE);
-                messageEdit.append(text_message);
+                messageEdit.setText(text_message);
                 numberEdit.setText(text_number);
-                // do something for button 1 click
+                // do something for button 6 click
                 break;
 
 
             }
 
-        // Sua Ação
 
     }
     }
@@ -140,11 +148,15 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         String number = numberEdit.getText().toString();
         String message = messageEdit.getText().toString();
 
+
         try {
             manager.sendTextMessage(number, null, message, null, null);
 
             Toast toast = Toast.makeText(this, "Message sent to number!", Toast.LENGTH_SHORT);
             toast.show();
+
+            messageEdit.setText("");
+            numberEdit.setText("");
         }
         catch(IllegalArgumentException exception) {
             Log.e("SendActivity", "number or message empty");

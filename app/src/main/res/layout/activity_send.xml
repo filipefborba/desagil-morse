@@ -57,10 +57,10 @@
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/backspace"
-        android:layout_alignParentEnd="true">
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,35 +72,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Frase 2" />
+                android:text="Estou com fome" />
 
             <Button
                 android:id="@+id/button5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Frase 3" />
+                android:text="Gostaria de falar com você" />
 
             <Button
                 android:id="@+id/button4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Frase 4" />
+                android:text="Gostaria de ir no banheiro" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Frase 5" />
+                android:text="Estou com dor" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Frase 6" />
+                android:text="Preciso que você venha agora!" />
         </LinearLayout>
     </ScrollView>
 
