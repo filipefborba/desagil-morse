@@ -10,12 +10,15 @@ public class MorseTree {
 
     public char translate(String code) {
         ArrayList letter = send.getLetter();
-        for (i = 0, i < letter.size(), i++){
-            String node = letter.get(i);
-            if (node == "."){
+        int index;
+        for (index = 0; index  < letter.size();++index){
+            String node_finder = (String) letter.get(index);
+            if (node_finder == "."){
                 //go to left
             }
-            if
+            if (node_finder == "-"){
+                //got to right
+            }
         }
         return 0;
     }
