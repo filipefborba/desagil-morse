@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Vector;
+
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
 
@@ -30,6 +33,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private long startTime;
     private long endTime;
     private long time;
+    private ArrayList letter;
 
 
     @Override
@@ -185,20 +189,30 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             time = endTime - startTime;
             System.out.println(time);
             if (time <= 150){
+                letter.add(".");
                 messageEdit.append(".");
             }
             else if (time > 150){
+                letter.add("-");
                 messageEdit.append("-");
             }
         }
         else if (endTime - startTime < 0){
             time = startTime - endTime;
             if (time > 700){
-                messageEdit.append(" ");
+                //messageEdit.append(" ");
+                letter = new ArrayList();
             }
 
         }
+        //System.out.println(letter);
         return false;
+    }
+
+
+
+    public ArrayList getLetter(){
+        return letter;
     }
 
 }
