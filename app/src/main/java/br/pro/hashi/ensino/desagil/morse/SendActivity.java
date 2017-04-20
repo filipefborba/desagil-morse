@@ -33,7 +33,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private long startTime;
     private long endTime;
     private long time;
-    private ArrayList letter;
+    private ArrayList<String> letter;
+    private MorseTree morseTree;
 
 
     @Override
@@ -50,8 +51,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
         button_ready = (ImageButton) findViewById(R.id.readytext);
         morse = (ImageButton) findViewById(R.id.morse);
-        button_ready.setOnClickListener((View.OnClickListener) this);
-        morse.setOnTouchListener((View.OnTouchListener) this);
+        button_ready.setOnClickListener(this);
+        morse.setOnTouchListener(this);
         //botoes de mensagens prontas
 
         button2 = (Button) findViewById(R.id.button2);
@@ -59,11 +60,11 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         button4 = (Button) findViewById(R.id.button4);
         button5 = (Button) findViewById(R.id.button5);
         button6 = (Button) findViewById(R.id.button6);
-        button6.setOnClickListener((View.OnClickListener) this);
-        button5.setOnClickListener((View.OnClickListener) this);
-        button4.setOnClickListener((View.OnClickListener) this);
-        button3.setOnClickListener((View.OnClickListener) this);
-        button2.setOnClickListener((View.OnClickListener) this);
+        button6.setOnClickListener(this);
+        button5.setOnClickListener(this);
+        button4.setOnClickListener(this);
+        button3.setOnClickListener(this);
+        button2.setOnClickListener(this);
 
 
     }
@@ -190,29 +191,30 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             System.out.println(time);
             if (time <= 150){
                 letter.add(".");
-                messageEdit.append(".");
+                //messageEdit.append(".");
             }
             else if (time > 150){
                 letter.add("-");
-                messageEdit.append("-");
+                //messageEdit.append("-");
             }
         }
-        else if (endTime - startTime < 0){
-            time = startTime - endTime;
-            if (time > 700){
-                //messageEdit.append(" ");
-                letter = new ArrayList();
-            }
+        else {
+            if (endTime - startTime < 0) {
+                time = startTime - endTime;
+                if (time > 700) {
+                    letter = new ArrayList<String>();
+                }
 
+            }
         }
         //System.out.println(letter);
+
+
         return false;
     }
 
 
 
-    public ArrayList getLetter(){
-        return letter;
-    }
+
 
 }
