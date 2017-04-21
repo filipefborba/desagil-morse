@@ -1,7 +1,9 @@
 package br.pro.hashi.ensino.desagil.morse;
 
+import java.util.List;
+
 public class MorseTree {
-    public char translate(String code) {
-        return '?';
+    public String translate(List<String> code) {
+        return "?";
     }
 }
