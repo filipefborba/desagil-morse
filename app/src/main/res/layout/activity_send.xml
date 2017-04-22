@@ -57,10 +57,10 @@
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/backspace"
-        android:layout_alignParentEnd="true">
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
