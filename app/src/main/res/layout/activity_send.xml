@@ -72,35 +72,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Estou com fome" />
+                android:text="Emergência - Venha aqui agora" />
 
             <Button
                 android:id="@+id/button5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Gostaria de falar com você" />
+                android:text="Preciso ir ao banheiro" />
 
             <Button
                 android:id="@+id/button4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Gostaria de ir no banheiro" />
+                android:text="Preciso falar com você" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Estou com dor" />
+                android:text="Estou com dores" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Preciso que você venha agora!" />
+                android:text="Estou com fome" />
         </LinearLayout>
     </ScrollView>
 
