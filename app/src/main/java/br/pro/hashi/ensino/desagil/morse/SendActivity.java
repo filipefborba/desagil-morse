@@ -213,11 +213,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             time = endTime - startTime;
             if (time <= 150){
                 morseToTextList.add(".");
-                //messageEdit.append(".");
             }
             else if (time > 200){
                 morseToTextList.add("-");
-                //messageEdit.append("-");
             }
         }
 
@@ -225,7 +223,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             time = startTime - endTime;
             if (time > 700){
                 if (morseToTextList.size() != 0){
-                    //System.out.println(morseToTextList);
                     String translated = morseTree.translate(morseToTextList);
                     if (translated != null) {
                         messageEdit.append(translated);
@@ -233,15 +230,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
                     morseToTextList.clear();
                 }
-
-
-
-                }
-
-
-
-
-
+            }
         }
 
         return false;

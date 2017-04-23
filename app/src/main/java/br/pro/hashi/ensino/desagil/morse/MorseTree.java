@@ -47,7 +47,7 @@ public class MorseTree {
                     actual_node = actual_node.getLeft();
                     // go to left
 
-            }
+                }
 
 
 
@@ -55,8 +55,8 @@ public class MorseTree {
                     actual_node = actual_node.getRight();
                     // go to right
 
+                }
             }
-        }
         }
 
 
