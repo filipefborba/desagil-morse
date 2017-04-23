@@ -31,6 +31,7 @@ public class Node {
     public void setOpen(boolean open) {
         this.open = open;
     }
+
     public String getCharacter() {
         return character;
     }

@@ -2,7 +2,6 @@ package br.pro.hashi.ensino.desagil.morse;
 
 
 import android.provider.Settings;
-
 import java.util.List;
 
 public class MorseTree {

@@ -50,7 +50,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         button_ready.setOnClickListener(this);
         morse.setOnTouchListener(this);
 
-
         //Ready messages buttons and their listeners
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
@@ -64,7 +63,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         button2.setOnClickListener(this);
 
     }
-
+    
     //Ready messages function
     public void onClick(View v) {
         if (!turn) {
@@ -221,4 +220,48 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         }
         return false;
     }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            //record the start time
+            startTime = event.getEventTime();
+
+            //System.out.println("LC  IN DOWN");
+        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+            //record the end time
+            endTime = event.getEventTime();
+            //System.out.println("LC   IN UP");
+        }
+        if (endTime - startTime > 0) {
+            time = endTime - startTime;
+            System.out.println(time);
+            if (time <= 150){
+                letter.add(".");
+                //messageEdit.append(".");
+            }
+            else if (time > 150){
+                letter.add("-");
+                //messageEdit.append("-");
+            }
+        }
+        else {
+            if (endTime - startTime < 0) {
+                time = startTime - endTime;
+                if (time > 700) {
+                    letter = new ArrayList<String>();
+                }
+
+            }
+        }
+        //System.out.println(letter);
+
+
+        return false;
+    }
+
+
+
+
+
 }
