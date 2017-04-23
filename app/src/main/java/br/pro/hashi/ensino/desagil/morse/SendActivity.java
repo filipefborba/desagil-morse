@@ -31,6 +31,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private long startTime;
     private long endTime;
     private long time;
+    List<String> morseToTextList = new ArrayList<String>();
+    MorseTree morseTree = new MorseTree();
+
 
 
     @Override
@@ -186,37 +189,53 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        List<String> morseToTextList = new ArrayList<String>();
-        MorseTree morseTree = new MorseTree();
+
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             //record the start time
             startTime = event.getEventTime();
-            messageEdit.append("DOWN");
+            //messageEdit.append("DOWN");
         }
 
         else if (event.getAction() == MotionEvent.ACTION_UP) {
             //record the end time
             endTime = event.getEventTime();
-            messageEdit.append("UP");
+            //messageEdit.append("UP");
         }
 
         //We have the time, now we use it to differentiate touch
         if (endTime - startTime > 0) {
             time = endTime - startTime;
             System.out.println(time);
-            if (time <= 200){
+            if (time <= 150){
                 morseToTextList.add(".");
-                messageEdit.append(".");
+                //messageEdit.append(".");
             }
-            else if (time > 200 && time < 700){
+            else if (time > 200){
                 morseToTextList.add("-");
-                messageEdit.append("-");
+                //messageEdit.append("-");
             }
-            else if (time > 700){
-                messageEdit.append(morseTree.translate(morseToTextList));
-                morseToTextList.clear();
-            }
+            System.out.println(time);
         }
+
+        else if (endTime - startTime < 0){
+            time = startTime - endTime;
+            if (time > 700){
+                if (morseToTextList.size() != 0){
+                    //System.out.println(morseToTextList);
+                    messageEdit.append(morseTree.translate(morseToTextList));
+                    morseToTextList.clear();
+                }
+
+
+
+                }
+
+
+
+
+
+        }
+
         return false;
     }
 }
