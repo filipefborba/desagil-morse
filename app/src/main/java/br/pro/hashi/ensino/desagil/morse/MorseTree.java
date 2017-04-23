@@ -40,6 +40,8 @@ public class MorseTree {
     }
 
     public String translate(List<String> morse){
-        return "?";
+        String character = "";
+
+        return character;
     }
 }
