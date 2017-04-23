@@ -6,7 +6,6 @@ import java.util.List;
 
 public class MorseTree {
     private SendActivity send;
-    private String letter;
     private Node[] nodes;
     private String[] treeToMorse = {null,"e","t","i","a","n","m","s","u","r","w","d","k","g","o",
                                         "h","v","f",null,"l",null,"p","j","b","x","c","y","z","q",
@@ -40,7 +39,6 @@ public class MorseTree {
 
     public String translate(List<String> morse){
         String character = "";
-
         return character;
     }
 }
