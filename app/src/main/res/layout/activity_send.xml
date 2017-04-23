@@ -114,7 +114,8 @@
         android:background="@drawable/roundbutton"
         android:text="Delete"
         android:layout_alignTop="@+id/send"
-        android:layout_alignEnd="@+id/morse" />
+        android:layout_alignEnd="@+id/morse"
+        android:onClick="backSpace"/>
 
     <ImageButton
         android:id="@+id/readytext"

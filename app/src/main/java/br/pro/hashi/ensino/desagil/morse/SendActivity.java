@@ -3,7 +3,6 @@ package br.pro.hashi.ensino.desagil.morse;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -11,9 +10,8 @@ import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.List;
 
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
@@ -33,8 +31,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private long startTime;
     private long endTime;
     private long time;
-    private ArrayList<String> letter;
-    private MorseTree morseTree;
 
 
     @Override
@@ -42,8 +38,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
 
-
-        caregiver_number = "111111111";
+        caregiver_number = "11941403393";
 
         messageEdit = (EditText) findViewById(R.id.messageEdit);
         numberEdit = (EditText) findViewById(R.id.numberEdit);
@@ -53,8 +48,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         morse = (ImageButton) findViewById(R.id.morse);
         button_ready.setOnClickListener(this);
         morse.setOnTouchListener(this);
-        //botoes de mensagens prontas
 
+        //Ready messages buttons and their listeners
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
         button4 = (Button) findViewById(R.id.button4);
@@ -66,12 +61,11 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         button3.setOnClickListener(this);
         button2.setOnClickListener(this);
 
-
     }
-
-
+    
+    //Ready messages function
     public void onClick(View v) {
-        if (turn == false) {
+        if (!turn) {
             ready.setVisibility(View.VISIBLE);
             morse.setVisibility(View.INVISIBLE);
             turn = true;
@@ -84,7 +78,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button2: {
                 String text_message = button2.getText().toString();
                 String text_number = caregiver_number;
-                ;
                 ready.setVisibility(View.INVISIBLE);
                 morse.setVisibility(View.VISIBLE);
 
@@ -96,7 +89,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button3: {
                 String text_message = button3.getText().toString();
                 String text_number = caregiver_number;
-                ;
                 ready.setVisibility(View.INVISIBLE);
                 morse.setVisibility(View.VISIBLE);
 
@@ -110,7 +102,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button4: {
                 String text_message = button4.getText().toString();
                 String text_number = caregiver_number;
-                ;
                 ready.setVisibility(View.INVISIBLE);
                 morse.setVisibility(View.VISIBLE);
 
@@ -124,7 +115,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button5: {
                 String text_message = button5.getText().toString();
                 String text_number = caregiver_number;
-                ;
                 ready.setVisibility(View.INVISIBLE);
                 morse.setVisibility(View.VISIBLE);
 
@@ -138,7 +128,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button6: {
                 String text_message = button6.getText().toString();
                 String text_number = caregiver_number;
-                ;
                 ready.setVisibility(View.INVISIBLE);
                 morse.setVisibility(View.VISIBLE);
                 messageEdit.setText(text_message);
@@ -153,7 +142,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
+    //Send message function
     public void sendMessage(View view) {
         SmsManager manager = SmsManager.getDefault();
 
@@ -170,51 +159,64 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             messageEdit.setText("");
             numberEdit.setText("");
         } catch (IllegalArgumentException exception) {
-            Log.e("SendActivity", "number or message empty");
+            if (message.equals("")){
+                Toast toast = Toast.makeText(this, "Message is empty!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+            else if (number.equals("")){
+                Toast toast = Toast.makeText(this, "Number is empty!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
+    }
+
+    //Backspace button function
+    public void backSpace (View view) {
+        String message = messageEdit.getText().toString();
+
+        if (message.length() > 1) {
+            message = message.substring(0, message.length() - 1);
+            messageEdit.setText(message);
+        }
+        else if (message.length() <=1 ) {
+            messageEdit.setText("");
         }
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        List<String> morseToTextList = new ArrayList<String>();
+        MorseTree morseTree = new MorseTree();
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             //record the start time
             startTime = event.getEventTime();
+            messageEdit.append("DOWN");
+        }
 
-            //System.out.println("LC  IN DOWN");
-        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+        else if (event.getAction() == MotionEvent.ACTION_UP) {
             //record the end time
             endTime = event.getEventTime();
-            //System.out.println("LC   IN UP");
+            messageEdit.append("UP");
         }
+
+        //We have the time, now we use it to differentiate touch
         if (endTime - startTime > 0) {
             time = endTime - startTime;
             System.out.println(time);
-            if (time <= 150){
-                letter.add(".");
-                //messageEdit.append(".");
+            if (time <= 200){
+                morseToTextList.add(".");
+                messageEdit.append(".");
             }
-            else if (time > 150){
-                letter.add("-");
-                //messageEdit.append("-");
+            else if (time > 200 && time < 700){
+                morseToTextList.add("-");
+                messageEdit.append("-");
             }
-        }
-        else {
-            if (endTime - startTime < 0) {
-                time = startTime - endTime;
-                if (time > 700) {
-                    letter = new ArrayList<String>();
-                }
-
+            else if (time > 700){
+                messageEdit.append(morseTree.translate(morseToTextList));
+                morseToTextList.clear();
             }
         }
-        //System.out.println(letter);
-
-
         return false;
     }
-
-
-
-
-
 }
