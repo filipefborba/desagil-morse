@@ -40,7 +40,6 @@ public class MorseTree {
     public String translate(List<String> morse) {
         String character;
         Node actual_node = nodes[0];
-        System.out.println(actual_node.getCharacter());
         for (int i = 0; i < morse.size(); i++) {
             if (actual_node != null){
                 if (morse.get(i) == ".") {

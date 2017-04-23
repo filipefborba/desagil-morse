@@ -1,5 +1,6 @@
 package br.pro.hashi.ensino.desagil.morse;
 
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -10,6 +11,9 @@ import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
+
+import org.junit.rules.Stopwatch;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -204,8 +208,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
         //We have the time, now we use it to differentiate touch
         if (endTime - startTime > 0) {
+
+
             time = endTime - startTime;
-            System.out.println(time);
             if (time <= 150){
                 morseToTextList.add(".");
                 //messageEdit.append(".");
@@ -214,7 +219,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 morseToTextList.add("-");
                 //messageEdit.append("-");
             }
-            System.out.println(time);
         }
 
         else if (endTime - startTime < 0){
@@ -222,7 +226,11 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             if (time > 700){
                 if (morseToTextList.size() != 0){
                     //System.out.println(morseToTextList);
-                    messageEdit.append(morseTree.translate(morseToTextList));
+                    String translated = morseTree.translate(morseToTextList);
+                    if (translated != null) {
+                        messageEdit.append(translated);
+                    }
+
                     morseToTextList.clear();
                 }
 
