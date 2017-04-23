@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -220,48 +219,4 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         }
         return false;
     }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            //record the start time
-            startTime = event.getEventTime();
-
-            //System.out.println("LC  IN DOWN");
-        } else if (event.getAction() == MotionEvent.ACTION_UP) {
-            //record the end time
-            endTime = event.getEventTime();
-            //System.out.println("LC   IN UP");
-        }
-        if (endTime - startTime > 0) {
-            time = endTime - startTime;
-            System.out.println(time);
-            if (time <= 150){
-                letter.add(".");
-                //messageEdit.append(".");
-            }
-            else if (time > 150){
-                letter.add("-");
-                //messageEdit.append("-");
-            }
-        }
-        else {
-            if (endTime - startTime < 0) {
-                time = startTime - endTime;
-                if (time > 700) {
-                    letter = new ArrayList<String>();
-                }
-
-            }
-        }
-        //System.out.println(letter);
-
-
-        return false;
-    }
-
-
-
-
-
 }
