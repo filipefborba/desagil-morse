@@ -1,6 +1,5 @@
 package br.pro.hashi.ensino.desagil.morse;
 
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -12,10 +11,11 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-import org.junit.rules.Stopwatch;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
@@ -37,6 +37,13 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private long time;
     List<String> morseToTextList = new ArrayList<String>();
     MorseTree morseTree = new MorseTree();
+    int delay = 1000;
+    boolean times = false;
+    Timer timer = new Timer();
+
+
+
+
 
 
 
@@ -72,6 +79,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     
     //Ready messages function
     public void onClick(View v) {
+
         if (!turn) {
             ready.setVisibility(View.VISIBLE);
             morse.setVisibility(View.INVISIBLE);
@@ -194,6 +202,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
+
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             //record the start time
             startTime = event.getEventTime();
@@ -204,12 +213,12 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             //record the end time
             endTime = event.getEventTime();
             //messageEdit.append("UP");
+
+
         }
 
         //We have the time, now we use it to differentiate touch
         if (endTime - startTime > 0) {
-
-
             time = endTime - startTime;
             if (time <= 150){
                 morseToTextList.add(".");
@@ -217,22 +226,58 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             else if (time > 200){
                 morseToTextList.add("-");
             }
-        }
+            if (times == true){
+                timer.cancel();
+                timer.purge();
+                timer = new Timer();
 
-        else if (endTime - startTime < 0){
-            time = startTime - endTime;
-            if (time > 700){
-                if (morseToTextList.size() != 0){
-                    String translated = morseTree.translate(morseToTextList);
-                    if (translated != null) {
-                        messageEdit.append(translated);
-                    }
-
-                    morseToTextList.clear();
-                }
             }
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    times = false;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (morseToTextList.size() != 0){
+                                String translated = morseTree.translate(morseToTextList);
+                                if (translated != null) {
+                                    messageEdit.append(translated);
+
+                                }
+
+                                morseToTextList.clear();
+
+                            }
+                        }
+                    });
+
+                }
+            };
+            timer.schedule(timerTask,delay);
+
+            times = true;
+
         }
+
+//        else if (endTime - startTime < 0){
+//
+//            time = startTime - endTime;
+//            if (time > 700){
+//                //timer.cancel();
+//                if (morseToTextList.size() != 0){
+//                    String translated = morseTree.translate(morseToTextList);
+//                    if (translated != null) {
+//                        messageEdit.append(translated);
+//                    }
+//
+//                    morseToTextList.clear();
+//                }
+//            }
+//        }
 
         return false;
     }
+
+
 }

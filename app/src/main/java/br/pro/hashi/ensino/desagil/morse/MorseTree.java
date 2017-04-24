@@ -43,30 +43,20 @@ public class MorseTree {
         for (int i = 0; i < morse.size(); i++) {
             if (actual_node != null){
                 if (morse.get(i) == ".") {
-
                     actual_node = actual_node.getLeft();
                     // go to left
-
                 }
-
-
-
                 else if (morse.get(i) == "-") {
                     actual_node = actual_node.getRight();
                     // go to right
-
                 }
             }
         }
-
-
-
         if ( actual_node != null){
             character = actual_node.getCharacter();
             return character;
         }
         else {
-
             return "";
         }
     }
