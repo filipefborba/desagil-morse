@@ -10,8 +10,12 @@ import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
+
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
@@ -31,6 +35,16 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private long startTime;
     private long endTime;
     private long time;
+    List<String> morseToTextList = new ArrayList<String>();
+    MorseTree morseTree = new MorseTree();
+    int delay = 1000;
+    boolean times = false;
+    Timer timer = new Timer();
+
+
+
+
+
 
 
     @Override
@@ -65,6 +79,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     
     //Ready messages function
     public void onClick(View v) {
+
         if (!turn) {
             ready.setVisibility(View.VISIBLE);
             morse.setVisibility(View.INVISIBLE);
@@ -186,37 +201,83 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        List<String> morseToTextList = new ArrayList<String>();
-        MorseTree morseTree = new MorseTree();
+
+
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             //record the start time
             startTime = event.getEventTime();
-            messageEdit.append("DOWN");
+            //messageEdit.append("DOWN");
         }
 
         else if (event.getAction() == MotionEvent.ACTION_UP) {
             //record the end time
             endTime = event.getEventTime();
-            messageEdit.append("UP");
+            //messageEdit.append("UP");
+
+
         }
 
         //We have the time, now we use it to differentiate touch
         if (endTime - startTime > 0) {
             time = endTime - startTime;
-            System.out.println(time);
-            if (time <= 200){
+            if (time <= 150){
                 morseToTextList.add(".");
-                messageEdit.append(".");
             }
-            else if (time > 200 && time < 700){
+            else if (time > 200){
                 morseToTextList.add("-");
-                messageEdit.append("-");
             }
-            else if (time > 700){
-                messageEdit.append(morseTree.translate(morseToTextList));
-                morseToTextList.clear();
+            if (times == true){
+                timer.cancel();
+                timer.purge();
+                timer = new Timer();
+
             }
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    times = false;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (morseToTextList.size() != 0){
+                                String translated = morseTree.translate(morseToTextList);
+                                if (translated != null) {
+                                    messageEdit.append(translated);
+
+                                }
+
+                                morseToTextList.clear();
+
+                            }
+                        }
+                    });
+
+                }
+            };
+            timer.schedule(timerTask,delay);
+
+            times = true;
+
         }
+
+//        else if (endTime - startTime < 0){
+//
+//            time = startTime - endTime;
+//            if (time > 700){
+//                //timer.cancel();
+//                if (morseToTextList.size() != 0){
+//                    String translated = morseTree.translate(morseToTextList);
+//                    if (translated != null) {
+//                        messageEdit.append(translated);
+//                    }
+//
+//                    morseToTextList.clear();
+//                }
+//            }
+//        }
+
         return false;
     }
+
+
 }
