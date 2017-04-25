@@ -5,13 +5,14 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 
 public class MorseTreeTest {
     private MorseTree tree;
-    private List<String> morseToTextList;
+    List<String> morseToTextList = new ArrayList<String>();
 
     @Before
     public void setUp() {
@@ -132,8 +133,8 @@ public class MorseTreeTest {
 
     @Test
     public void checkL() {
-        morseToTextList.add("-");
         morseToTextList.add(".");
+        morseToTextList.add("-");
         morseToTextList.add(".");
         morseToTextList.add(".");
         morseToTextList.add(" ");
