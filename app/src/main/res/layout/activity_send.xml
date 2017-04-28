@@ -7,6 +7,9 @@
     android:layout_margin="16dp"
     tools:context="br.pro.hashi.ensino.desagil.morse.SendActivity">
 
+
+    
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -111,7 +114,7 @@
         android:scaleType="centerInside"
         android:padding="10dp"
         android:src="@drawable/backspacearrow"
-        android:background="@drawable/roundbutton"
+        android:background="@drawable/roundbutton_right"
         android:text="Delete"
         android:layout_alignTop="@+id/send"
         android:layout_alignEnd="@+id/morse"
@@ -127,7 +130,7 @@
         android:scaleType="centerInside"
         android:padding="10dp"
         android:src="@drawable/chatbubble"
-        android:background="@drawable/roundbutton" />
+        android:background="@drawable/roundbutton_topcenter" />
 
     <ImageButton
         android:id="@+id/send"
@@ -138,7 +141,7 @@
         android:scaleType="centerInside"
         android:padding="10dp"
         android:src="@drawable/sendbutton"
-        android:background="@drawable/roundbutton"
+        android:background="@drawable/roundbutton_left"
         android:onClick="sendMessage" />
 
 </RelativeLayout>

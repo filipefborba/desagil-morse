@@ -3,6 +3,7 @@ package br.pro.hashi.ensino.desagil.morse;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -40,12 +41,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     int delay = 1000;
     boolean times = false;
     Timer timer = new Timer();
-
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
