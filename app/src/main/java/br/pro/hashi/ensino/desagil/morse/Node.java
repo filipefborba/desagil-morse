@@ -28,6 +28,7 @@ public class Node {
     public boolean isOpen() {
         return open;
     }
+
     public void setOpen(boolean open) {
         this.open = open;
     }
@@ -35,9 +36,11 @@ public class Node {
     public String getCharacter() {
         return character;
     }
+
     public Node getLeft() {
         return left;
     }
+
     public Node getRight() {
         return right;
     }
