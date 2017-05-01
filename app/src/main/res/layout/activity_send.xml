@@ -104,6 +104,58 @@
         </LinearLayout>
     </ScrollView>
 
+
+    <ScrollView
+        android:id="@+id/scroll_contato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/backspace"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_c6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="11917283946" />
+
+            <Button
+                android:id="@+id/button_c5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="11946791382" />
+
+            <Button
+                android:id="@+id/button_c4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="11912345678"/>
+
+            <Button
+                android:id="@+id/button_c3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="11945612357" />
+
+            <Button
+                android:id="@+id/button_c2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="11988454588" />
+        </LinearLayout>
+    </ScrollView>
+
+
     <ImageButton
         android:id="@+id/backspace"
         android:layout_width="50dp"
@@ -116,6 +168,7 @@
         android:layout_alignTop="@+id/send"
         android:layout_alignEnd="@+id/morse"
         android:onClick="backSpace"/>
+
 
     <ImageButton
         android:id="@+id/readytext"
@@ -140,5 +193,15 @@
         android:src="@drawable/sendbutton"
         android:background="@drawable/roundbutton"
         android:onClick="sendMessage" />
+
+    <ImageButton
+        android:id="@+id/contato"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:background="@drawable/roundbutton"
+        android:src="@drawable/sendbutton"
+        android:layout_above="@+id/morse"
+        android:layout_toEndOf="@+id/readytext" />
 
 </RelativeLayout>

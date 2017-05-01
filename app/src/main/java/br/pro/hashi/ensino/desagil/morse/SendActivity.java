@@ -17,19 +17,29 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static br.pro.hashi.ensino.desagil.morse.R.id.readytext;
+import static br.pro.hashi.ensino.desagil.morse.R.id.contato;
+
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
 
     private EditText numberEdit;
     private EditText messageEdit;
     private ScrollView ready;
+    private ScrollView l_contato;
     private ImageButton morse;
     private Button button2;
     private Button button3;
     private Button button4;
     private Button button5;
     private Button button6;
+    private Button button_c2;
+    private Button button_c3;
+    private Button button_c4;
+    private Button button_c5;
+    private Button button_c6;
     public ImageButton button_ready;
+    public ImageButton button_contato;
     public String caregiver_number;
     private boolean turn;
     private long startTime;
@@ -41,24 +51,18 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     boolean times = false;
     Timer timer = new Timer();
 
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
 
-        caregiver_number = "11941403393";
-
         messageEdit = (EditText) findViewById(R.id.messageEdit);
         numberEdit = (EditText) findViewById(R.id.numberEdit);
         ready = (ScrollView) findViewById(R.id.scroll);
+        l_contato = (ScrollView) findViewById(R.id.scroll_contato);
 
-        button_ready = (ImageButton) findViewById(R.id.readytext);
+
+        button_ready = (ImageButton) findViewById(readytext);
         morse = (ImageButton) findViewById(R.id.morse);
         button_ready.setOnClickListener(this);
         morse.setOnTouchListener(this);
@@ -75,11 +79,29 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         button3.setOnClickListener(this);
         button2.setOnClickListener(this);
 
+
+
+        button_contato = (ImageButton) findViewById(contato);
+        button_contato.setOnClickListener(this);
+        button_c2 = (Button) findViewById(R.id.button_c2);
+        button_c3 = (Button) findViewById(R.id.button_c3);
+        button_c4 = (Button) findViewById(R.id.button_c4);
+        button_c5 = (Button) findViewById(R.id.button_c5);
+        button_c6 = (Button) findViewById(R.id.button_c6);
+        button_c6.setOnClickListener(this);
+        button_c5.setOnClickListener(this);
+        button_c4.setOnClickListener(this);
+        button_c3.setOnClickListener(this);
+        button_c2.setOnClickListener(this);
+
     }
     
     //Ready messages function
     public void onClick(View v) {
+        caregiver_number = "11941403393";
+        if (v == button_ready){
 
+            l_contato.setVisibility(View.INVISIBLE);
         if (!turn) {
             ready.setVisibility(View.VISIBLE);
             morse.setVisibility(View.INVISIBLE);
@@ -88,7 +110,21 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             ready.setVisibility(View.INVISIBLE);
             morse.setVisibility(View.VISIBLE);
             turn = false;
-        }
+        }}
+
+        else if (v == button_contato){
+            ready.setVisibility(View.INVISIBLE);
+            if (!turn) {
+                l_contato.setVisibility(View.VISIBLE);
+                morse.setVisibility(View.INVISIBLE);
+                turn = true;
+            }
+            else {
+                l_contato.setVisibility(View.INVISIBLE);
+                morse.setVisibility(View.VISIBLE);
+                turn = false;
+            }}
+
         switch (v.getId()) {
             case R.id.button2: {
                 String text_message = button2.getText().toString();
@@ -150,12 +186,61 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 // do something for button 6 click
                 break;
 
-
             }
+                case R.id.button_c2: {
+                    caregiver_number = "11988454588";
+                    String text_number = caregiver_number;
+                    l_contato.setVisibility(View.INVISIBLE);
+                    morse.setVisibility(View.VISIBLE);
 
+                    numberEdit.setText(text_number);
+                    // do something for button 6 click
+                    break;
+                }
+                case R.id.button_c3: {
+                    caregiver_number = "11945612357";
+                    String text_number = caregiver_number;
+                    l_contato.setVisibility(View.INVISIBLE);
+                    morse.setVisibility(View.VISIBLE);
+                    numberEdit.setText(text_number);
+                    // do something for button 6 click
+                    break;
 
+                }
+                case R.id.button_c4: {
+                    caregiver_number = "11912345678";
+                    String text_number = caregiver_number;
+                    l_contato.setVisibility(View.INVISIBLE);
+                    morse.setVisibility(View.VISIBLE);
+                    numberEdit.setText(text_number);
+                    // do something for button 6 click
+                    break;
+
+                }
+                case R.id.button_c5: {
+                    caregiver_number = "11946791382";
+                    String text_number = caregiver_number;
+                    l_contato.setVisibility(View.INVISIBLE);
+                    morse.setVisibility(View.VISIBLE);
+                    numberEdit.setText(text_number);
+                    // do something for button 6 click
+                    break;
+
+                }
+                case R.id.button_c6: {
+                    caregiver_number = "11917283946";
+                    String text_number = caregiver_number;
+                    l_contato.setVisibility(View.INVISIBLE);
+                    morse.setVisibility(View.VISIBLE);
+                    numberEdit.setText(text_number);
+                    // do something for button 6 click
+                    break;
+                }
         }
     }
+
+
+
 
     //Send message function
     public void sendMessage(View view) {
