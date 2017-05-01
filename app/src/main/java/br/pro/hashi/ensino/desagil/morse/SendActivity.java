@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import android.os.Vibrator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     int delay = 1000;
     boolean times = false;
     Timer timer = new Timer();
+    Vibrator vibrator;
 
 
 
@@ -220,11 +222,14 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         //We have the time, now we use it to differentiate touch
         if (endTime - startTime > 0) {
             time = endTime - startTime;
+            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             if (time <= 150){
                 morseToTextList.add(".");
+                vibrator.vibrate(100);
             }
             else if (time > 200){
                 morseToTextList.add("-");
+                vibrator.vibrate(300);
             }
             if (times == true){
                 timer.cancel();
