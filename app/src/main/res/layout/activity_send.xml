@@ -50,7 +50,7 @@
         android:scaleType="fitCenter"
         android:padding="50dp"
         android:src="@drawable/shortclick"
-        android:background="@drawable/roundbutton"
+        android:background="@drawable/tapzonebutton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -111,7 +111,7 @@
         android:scaleType="centerInside"
         android:padding="10dp"
         android:src="@drawable/backspacearrow"
-        android:background="@drawable/roundbutton"
+        android:background="@drawable/secondarybutton"
         android:text="Delete"
         android:layout_alignTop="@+id/send"
         android:layout_alignEnd="@+id/morse"
@@ -127,7 +127,7 @@
         android:scaleType="centerInside"
         android:padding="10dp"
         android:src="@drawable/chatbubble"
-        android:background="@drawable/roundbutton" />
+        android:background="@drawable/secondarybutton" />
 
     <ImageButton
         android:id="@+id/send"
@@ -138,7 +138,7 @@
         android:scaleType="centerInside"
         android:padding="10dp"
         android:src="@drawable/sendbutton"
-        android:background="@drawable/roundbutton"
+        android:background="@drawable/mainbutton"
         android:onClick="sendMessage" />
 
 </RelativeLayout>
