@@ -111,7 +111,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/secondarybutton"
-        android:onClick=""
+        android:onClick="space"
         android:padding="10dp"
         android:scaleType="centerInside"
         android:src="@drawable/space_bar"

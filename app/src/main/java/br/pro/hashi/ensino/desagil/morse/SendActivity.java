@@ -101,7 +101,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
     //Ready messages function
     public void onClick(View v) {
 
@@ -209,6 +208,13 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 toast.show();
             }
         }
+    }
+
+    //Space button function
+    public void space (View view) {
+        String message = messageEdit.getText().toString();
+        message = message + " ";
+        messageEdit.setText(message);
     }
 
     //Backspace button function
