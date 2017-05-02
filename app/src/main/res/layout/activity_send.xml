@@ -53,7 +53,8 @@
         android:layout_height="wrap_content"
         android:visibility="invisible"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="270dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,15 +102,14 @@
         android:id="@+id/morse"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:scaleType="fitCenter"
+        android:scaleType="centerInside"
         android:padding="50dp"
         android:src="@drawable/clickmorse"
         android:background="@drawable/tapzonebutton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="25dp"
-        android:layout_alignTop="@+id/scroll"/>
+        android:layout_marginTop="200dp"/>
 
     <ImageButton
         android:id="@+id/space"
@@ -121,7 +121,7 @@
         android:scaleType="centerInside"
         android:src="@drawable/space_bar"
         android:layout_centerHorizontal="true"
-        android:layout_alignTop="@id/scroll"/>
+        android:layout_centerVertical="true"/>
 
     <ImageButton
         android:id="@+id/send"
@@ -133,7 +133,7 @@
         android:scaleType="centerInside"
         android:src="@drawable/sendbutton"
         android:layout_below="@+id/messageEdit"
-        android:layout_alignTop="@+id/scroll"
+        android:layout_alignTop="@+id/space"
         android:layout_toEndOf="@+id/space"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"/>
@@ -149,7 +149,7 @@
         android:text="Delete"
         android:onClick="backSpace"
         android:layout_toEndOf="@id/send"
-        android:layout_alignTop="@id/scroll"/>
+        android:layout_alignTop="@id/space"/>
 
     <ImageButton
         android:id="@+id/contacts"
@@ -159,7 +159,7 @@
         android:padding="10dp"
         android:scaleType="centerInside"
         android:src="@drawable/contact"
-        android:layout_alignTop="@+id/scroll"
+        android:layout_alignTop="@+id/space"
         android:layout_toStartOf="@id/space"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
@@ -173,7 +173,7 @@
         android:scaleType="centerInside"
         android:src="@drawable/chatbubble"
         android:layout_toStartOf="@id/contacts"
-        android:layout_alignTop="@id/scroll">
+        android:layout_alignTop="@id/space">
 
     </ImageButton>
 
