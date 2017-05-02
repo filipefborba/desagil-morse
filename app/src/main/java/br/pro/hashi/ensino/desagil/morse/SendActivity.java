@@ -95,11 +95,12 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             cursor.moveToFirst();
             int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
             numero = cursor.getString(column);
-            numberEdit.setText(cursor.getString(column));
+            numberEdit.setText(numero);
 
 
         }
     }
+
 
     //Ready messages function
     public void onClick(View v) {
