@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/Button_dicionary"
-    android:title="Dicionário" />;
-    android:icon="@drawable/ic_Button_dicionary";
-    android:title="@string/Button_dicionary";
-    android:showAsAction="ifRoom"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item android:id="@+id/romanToMorseButton"
+    android:title="Roman to Morse"
+    app:showAsAction="never"/>;
+<item android:id="@+id/morseToRomanMenu"
+        android:title="Morse to Roman"
+        app:showAsAction="never" />
 </menu>

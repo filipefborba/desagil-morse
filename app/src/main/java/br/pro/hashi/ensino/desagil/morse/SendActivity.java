@@ -43,6 +43,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private long endTime;
     List<String> morseToTextList = new ArrayList<>();
     MorseTree morseTree = new MorseTree();
+    MorseDictionary morseDictionary = new MorseDictionary();
     int delay = 1500;
     boolean times = false;
     Timer timer = new Timer();
@@ -58,12 +59,21 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        EditText romanToMorseEdit = (EditText) findViewById(R.id.morseToRomanList);
+        ScrollView romanToMorseEdit1 = (ScrollView) findViewById(R.id.morseToRomanList1);
+        String[] morseToTree = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+                "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.",
+                "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-",
+                "-.--", "--..", ".----", "..---", "...--", "....-", ".....",
+                "-....", "--...", "---..", "----.", "-----"};
+
+        for (int i = 0; i < morseToTree.length; i++){
+            romanToMorseEdit.append(morseDictionary.decode(morseToTree[i])+ " " + morseToTree[i] + "\n");
+        }
 
         int id = item.getItemId();
-        if (id == R.id.Button_dicionary) {
-
-
-            //do something
+        if (id == R.id.romanToMorseButton) {
+            romanToMorseEdit1.setVisibility(View.VISIBLE);
             return true;
         }
         return super.onOptionsItemSelected(item);

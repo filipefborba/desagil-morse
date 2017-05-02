@@ -178,4 +178,24 @@
 
     </ImageButton>
 
+    <ScrollView
+        android:id="@+id/morseToRomanList1"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        android:background="#27a5a2">
+
+
+        <EditText
+            android:id="@+id/morseToRomanList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:background="#27a5a2" />
+    </ScrollView>
+
 </RelativeLayout>
+

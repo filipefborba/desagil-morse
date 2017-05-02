@@ -19,7 +19,10 @@ public class MorseDictionary {
             null,",",null,null,null,null,":",null,null,null,null,null,null,
             null};
 
-    public String encode() {
+    private static String[] morseToTree = {null, ".", "-", "..", ".-", "-.", "--", "...", "..-", ".-.",
+    ".--", "-..", "-.-", "--.", "---", "....", "...-", "..-.", null, ".-..", null, ".--."};
+
+    public String decode(String morseCodeString) {
         Node[] nodes = new Node[127];
         for (int i = 0; i < treeToMorse.length; i++){
             nodes[i] = new Node(treeToMorse[i], null, null);
@@ -38,9 +41,10 @@ public class MorseDictionary {
             Node node = stack.peek();
             Node left = node.getLeft();
             Node right = node.getRight();
-            if (morseEncode.equals("-----")) {
-                System.out.println(node.getCharacter() + morseEncode);
-                return morseEncode;
+            if (morseEncode.equals(morseCodeString)) {
+                System.out.println(node.getCharacter() + " " + morseEncode);
+                String decodedCharacter = node.getCharacter();
+                return decodedCharacter;
             }
             if(left != null && left.isOpen()) {
                 morseEncode = morseEncode + ".";
