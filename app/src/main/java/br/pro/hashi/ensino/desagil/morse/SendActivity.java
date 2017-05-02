@@ -1,5 +1,9 @@
 package br.pro.hashi.ensino.desagil.morse;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -42,12 +46,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     boolean times = false;
     Timer timer = new Timer();
     Vibrator vibrator;
-
-
-
-
-
-
+    public final int PICK_CONTACT = 2015;
+    private String numero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +77,30 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         button3.setOnClickListener(this);
         button2.setOnClickListener(this);
 
+        (findViewById(R.id.contacts)).setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                startActivityForResult(i, PICK_CONTACT);
+            }
+        });
+
     }
-    
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_CONTACT && resultCode == RESULT_OK) {
+            Uri contactUri = data.getData();
+            Cursor cursor = getContentResolver().query(contactUri, null, null, null, null);
+            cursor.moveToFirst();
+            int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+            numero = cursor.getString(column);
+            numberEdit.setText(cursor.getString(column));
+
+
+        }
+    }
+
     //Ready messages function
     public void onClick(View v) {
 
