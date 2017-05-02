@@ -39,10 +39,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private boolean turn;
     private long startTime;
     private long endTime;
-    private long time;
-    List<String> morseToTextList = new ArrayList<String>();
+    List<String> morseToTextList = new ArrayList<>();
     MorseTree morseTree = new MorseTree();
-    int delay = 1000;
+    int delay = 1500;
     boolean times = false;
     Timer timer = new Timer();
     Vibrator vibrator;
@@ -77,6 +76,17 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         button3.setOnClickListener(this);
         button2.setOnClickListener(this);
 
+        //When long clicked, vibrate for user feedback
+        morse.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                vibrator.vibrate(200);
+                return true;
+            }
+        });
+      
         (findViewById(R.id.contacts)).setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +94,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 startActivityForResult(i, PICK_CONTACT);
             }
         });
-
     }
 
     @Override
@@ -183,29 +192,35 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     //Send message function
     public void sendMessage(View view) {
-        SmsManager manager = SmsManager.getDefault();
+        if(numberEdit.hasFocus()) {
+            messageEdit.requestFocus();
+        }
+        else {
+            SmsManager manager = SmsManager.getDefault();
 
-        String number = numberEdit.getText().toString();
-        String message = messageEdit.getText().toString();
+            String number = numberEdit.getText().toString();
+            String message = messageEdit.getText().toString();
 
+            try {
+                manager.sendTextMessage(number, null, message, null, null);
 
-        try {
-            manager.sendTextMessage(number, null, message, null, null);
-
-            Toast toast = Toast.makeText(this, "Message sent to number!", Toast.LENGTH_SHORT);
-            toast.show();
-
-            messageEdit.setText("");
-            numberEdit.setText("");
-        } catch (IllegalArgumentException exception) {
-            if (message.equals("")){
-                Toast toast = Toast.makeText(this, "Message is empty!", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Message sent to number!", Toast.LENGTH_SHORT);
                 toast.show();
+
+                messageEdit.setText("");
+                numberEdit.setText("");
+                numberEdit.requestFocus();
             }
+            catch (IllegalArgumentException exception) {
+                if (message.equals("")){
+                    Toast toast = Toast.makeText(this, "Message is empty!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
 
-            else if (number.equals("")){
-                Toast toast = Toast.makeText(this, "Number is empty!", Toast.LENGTH_SHORT);
-                toast.show();
+                else if (number.equals("")){
+                    Toast toast = Toast.makeText(this, "Number is empty!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         }
     }
@@ -219,48 +234,47 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     //Backspace button function
     public void backSpace (View view) {
-        String message = messageEdit.getText().toString();
-
-        if (message.length() > 1) {
-            message = message.substring(0, message.length() - 1);
-            messageEdit.setText(message);
-        }
-        else if (message.length() <=1 ) {
-            messageEdit.setText("");
+        if (messageEdit.hasFocus()) {
+            String message = messageEdit.getText().toString();
+            if (message.length() > 1) {
+                message = message.substring(0, message.length() - 1);
+                messageEdit.setText(message);
+            } else if (message.length() <= 1) {
+                messageEdit.setText("");
+            }
+        } else {
+            String number = numberEdit.getText().toString();
+            if (number.length() > 1) {
+                number = number.substring(0, number.length() - 1);
+                numberEdit.setText(number);
+            } else if (number.length() <= 1) {
+                numberEdit.setText("");
+            }
         }
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-
-
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             //record the start time
             startTime = event.getEventTime();
-            //messageEdit.append("DOWN");
         }
 
         else if (event.getAction() == MotionEvent.ACTION_UP) {
             //record the end time
             endTime = event.getEventTime();
-            //messageEdit.append("UP");
-
-
         }
 
         //We have the time, now we use it to differentiate touch
         if (endTime - startTime > 0) {
-            time = endTime - startTime;
-            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-            if (time <= 150){
+            long time = endTime - startTime;
+            if (time <= 400){
                 morseToTextList.add(".");
-                vibrator.vibrate(100);
             }
-            else if (time > 200){
+            else if (time > 400){
                 morseToTextList.add("-");
-                vibrator.vibrate(300);
             }
-            if (times == true){
+            if (times){
                 timer.cancel();
                 timer.purge();
                 timer = new Timer();
@@ -276,12 +290,13 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                             if (morseToTextList.size() != 0){
                                 String translated = morseTree.translate(morseToTextList);
                                 if (translated != null) {
-                                    messageEdit.append(translated);
-
+                                    if(messageEdit.hasFocus()){
+                                        messageEdit.append(translated);
+                                    }else if(numberEdit.hasFocus()){
+                                        numberEdit.append(translated);
+                                    }
                                 }
-
                                 morseToTextList.clear();
-
                             }
                         }
                     });
@@ -289,29 +304,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 }
             };
             timer.schedule(timerTask,delay);
-
             times = true;
-
         }
-
-//        else if (endTime - startTime < 0){
-//
-//            time = startTime - endTime;
-//            if (time > 700){
-//                //timer.cancel();
-//                if (morseToTextList.size() != 0){
-//                    String translated = morseTree.translate(morseToTextList);
-//                    if (translated != null) {
-//                        messageEdit.append(translated);
-//                    }
-//
-//                    morseToTextList.clear();
-//                }
-//            }
-//        }
-
         return false;
     }
-
-
 }
