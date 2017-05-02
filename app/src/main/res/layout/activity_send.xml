@@ -16,7 +16,8 @@
         android:layout_alignParentStart="true"
         android:text="@string/text_number" />
 
-    <EditText android:id="@+id/numberEdit"
+    <EditText
+        android:id="@+id/numberEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="fill_horizontal"
@@ -93,63 +94,83 @@
     </ScrollView>
 
     <ImageButton
+        android:id="@+id/space"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/secondarybutton"
+        android:onClick="sendMessage"
+        android:padding="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/space_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/scroll">
+
+    <ImageButton
         android:id="@+id/morse"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginBottom="11dp"
         android:scaleType="fitCenter"
         android:padding="50dp"
         android:src="@drawable/shortclick"
         android:background="@drawable/tapzonebutton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <ImageButton
-        android:id="@+id/backspace"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="centerInside"
-        android:padding="10dp"
-        android:src="@drawable/backspacearrow"
-        android:background="@drawable/secondarybutton"
-        android:text="Delete"
-        android:onClick="backSpace"
-        android:layout_alignTop="@+id/scroll"
-        android:layout_alignEnd="@+id/morse" />
-
-    <ImageButton
-        android:id="@+id/readytext"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="centerInside"
-        android:padding="10dp"
-        android:src="@drawable/chatbubble"
-        android:background="@drawable/secondarybutton"
-        android:layout_above="@+id/scroll"
-        android:layout_toStartOf="@+id/backspace"
-        android:layout_marginEnd="17dp" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/scroll"/>
 
     <ImageButton
         android:id="@+id/send"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:scaleType="centerInside"
-        android:padding="10dp"
-        android:src="@drawable/sendbutton"
         android:background="@drawable/mainbutton"
         android:onClick="sendMessage"
+        android:padding="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/sendbutton"
+        android:layout_below="@+id/messageEdit"
         android:layout_alignTop="@+id/scroll"
-        android:layout_alignStart="@+id/morse" />
+        android:layout_toEndOf="@+id/space"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <ImageButton
+        android:id="@+id/backspace"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:padding="10dp"
+        android:src="@drawable/backspacearrow"
+        android:background="@drawable/secondarybutton"
+        android:text="Delete"
+        android:onClick="backSpace"
+        android:layout_toEndOf="@id/send"
+        android:layout_alignTop="@id/scroll"/>
+
 
     <ImageButton
         android:id="@+id/contacts"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:scaleType="centerInside"
-        android:padding="10dp"
-        android:src="@drawable/contact"
         android:background="@drawable/mainbutton"
-        android:layout_above="@+id/scroll"
-        android:layout_alignStart="@+id/messageEdit" />
+        android:padding="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/contact"
+        android:layout_alignTop="@+id/scroll"
+        android:layout_toStartOf="@id/space"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <ImageButton
+        android:id="@+id/readytext"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/secondarybutton"
+        android:padding="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/chatbubble"
+        android:layout_toStartOf="@id/contacts"
+        android:layout_alignTop="@id/scroll"/>
+
+    </ImageButton>
 
 </RelativeLayout>
