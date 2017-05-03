@@ -24,8 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/messageLabel"
-        android:inputType="phone"
-        android:cursorVisible="false"/>
+        android:inputType="phone" />
 
     <TextView
         android:id="@+id/messageLabel"
@@ -44,8 +43,7 @@
         android:layout_below="@+id/numberEdit"
         android:layout_marginTop="26dp"
         android:layout_toEndOf="@+id/messageLabel"
-        android:textSize="30sp"
-        android:cursorVisible="false"/>
+        android:textSize="30sp" />
 
     <ScrollView
         android:id="@+id/scroll"
@@ -177,5 +175,25 @@
         android:layout_alignTop="@id/space">
 
     </ImageButton>
+
+    <ScrollView
+        android:id="@+id/morseDictionaryMenu"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        android:background="#27a5a2">
+
+
+        <EditText
+            android:id="@+id/morseDictionaryList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:background="#27a5a2"
+            android:padding="10dp"/>
+    </ScrollView>
 
 </RelativeLayout>

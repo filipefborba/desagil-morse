@@ -6,8 +6,7 @@ public class Node {
     private String character;
     private Node left;
     private Node right;
-    
-
+    private Node parent;
 
 
 
@@ -16,11 +15,8 @@ public class Node {
         this.character = character;
         this.left = left;
         this.right = right;
-       
-
+        this.parent = null;
     }
-
-
 
 
     public void print() {
@@ -58,5 +54,24 @@ public class Node {
         return null;
     }
 
+    public Node getParent() {
+        return parent;
+    }
 
+    public void setLeft(Node left){
+        this.left = left;
+        if(left != null) {
+            left.setParent(this);
+        }
+    }
+    public void setRight(Node right){
+        this.right = right;
+        if(right != null) {
+            right.setParent(this);
+        }
+    }
+
+    public void setParent(Node parent){
+        this.parent = parent;
+    }
 }

@@ -7,6 +7,8 @@ import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import android.os.Vibrator;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,12 +44,69 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private long endTime;
     List<String> morseToTextList = new ArrayList<>();
     MorseTree morseTree = new MorseTree();
+    MorseDictionary morseDictionary = new MorseDictionary();
+    private EditText morseDictionaryList;
+    private ScrollView morseDictionaryMenu;
     int delay = 1500;
     boolean times = false;
     Timer timer = new Timer();
     Vibrator vibrator;
     public final int PICK_CONTACT = 2015;
     private String numero;
+
+    public void romanToMorsePrint(){
+        morseDictionary = new MorseDictionary();
+        String[] morseToTree = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+                "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.",
+                "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-",
+                "-.--", "--..", ".----", "..---", "...--", "....-", ".....",
+                "-....", "--...", "---..", "----.", "-----"};
+        for (int i = 0; i < morseToTree.length; i++){
+            morseDictionaryList.append(morseDictionary.decode(morseToTree[i])+ " = " + morseToTree[i] + "\n");
+        }
+    }
+
+    public void morseToRomanPrint(){
+        morseDictionary = new MorseDictionary();
+        String[] morseToTree = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+                "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.",
+                "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-",
+                "-.--", "--..", ".----", "..---", "...--", "....-", ".....",
+                "-....", "--...", "---..", "----.", "-----"};
+        List<String> roman = morseDictionary.morseToRoman();
+        for (int j = 0; j < roman.size(); j++){
+            morseDictionaryList.append(" " + roman.get(j)+"\n");
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        morseDictionaryList = (EditText) findViewById(R.id.morseDictionaryList);
+        morseDictionaryMenu = (ScrollView) findViewById(R.id.morseDictionaryMenu);
+
+
+        if (item.getItemId() == R.id.romanToMorseButton) {
+            morseDictionaryList.setText("");
+            romanToMorsePrint();
+            morseDictionaryMenu.setVisibility(View.VISIBLE);
+            morseDictionaryList.setVisibility(View.VISIBLE);
+            morseDictionaryList.requestFocus();
+            return true;
+        } else {
+            morseDictionaryList.setText("");
+            morseToRomanPrint();
+            morseDictionaryMenu.setVisibility(View.VISIBLE);
+            morseDictionaryList.setVisibility(View.VISIBLE);
+            morseDictionaryList.requestFocus();
+            return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +123,10 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         morse = (ImageButton) findViewById(R.id.morse);
         button_ready.setOnClickListener(this);
         morse.setOnTouchListener(this);
+
+        //Dictionary listener
+        morseDictionaryList = (EditText) findViewById(R.id.morseDictionaryList);
+        morseDictionaryList.setOnClickListener(this);
 
         //Ready messages buttons and their listeners
         button2 = (Button) findViewById(R.id.button2);
@@ -112,7 +176,11 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     //Ready messages function
     public void onClick(View v) {
-
+        if (v.getId() == R.id.morseDictionaryList) {
+            morseDictionaryMenu.setVisibility(View.INVISIBLE);
+            morseDictionaryList.setVisibility(View.INVISIBLE);
+            turn = true;
+        }
         if (!turn) {
             ready.setVisibility(View.VISIBLE);
             morse.setVisibility(View.INVISIBLE);
