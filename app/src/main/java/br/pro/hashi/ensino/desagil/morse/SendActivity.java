@@ -16,11 +16,8 @@ import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
-
 import android.os.Vibrator;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -62,7 +59,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 "-.--", "--..", ".----", "..---", "...--", "....-", ".....",
                 "-....", "--...", "---..", "----.", "-----"};
         for (int i = 0; i < morseToTree.length; i++){
-            morseDictionaryList.append(morseDictionary.decode(morseToTree[i])+ " = " + morseToTree[i] + "\n");
+            morseDictionaryList.append(morseDictionary.romanToMorse(morseToTree[i])+ " = " + morseToTree[i] + "\n");
         }
     }
 
