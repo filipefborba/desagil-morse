@@ -6,19 +6,31 @@ public class Node {
     private String character;
     private Node left;
     private Node right;
+    private Node Parent;
+    private char Character;
 
-    public Node(String character, Node left, Node right) {
+
+
+
+    public Node(String character, Node left, Node right, Node Parent, char Character) {
         open = true;
         this.character = character;
         this.left = left;
         this.right = right;
+        this.Parent= Parent;
+        this.Character = Character;
+
+
     }
 
+
+
+
     public void print() {
-        if(left != null) {
+        if (left != null) {
             left.print();
         }
-        if(right != null) {
+        if (right != null) {
             right.print();
         }
         System.out.print(" " + character);
@@ -44,4 +56,20 @@ public class Node {
     public Node getRight() {
         return right;
     }
+
+    public String getValue() {
+        return null;
+    }
+
+    public Node getParent() {
+        return Parent;
+    }
+    public void SetParent(Node Parent){
+        this.Parent = Parent;
+    }
+    public char getChar(){
+        return Character;
+    }
+
+
 }
