@@ -58,15 +58,5 @@ public class Node {
         return null;
     }
 
-    public Node getParent() {
-        return Parent;
-    }
-    public void SetParent(Node Parent){
-        this.Parent = Parent;
-    }
-    public char getChar(){
-        return Character;
-    }
-
 
 }
