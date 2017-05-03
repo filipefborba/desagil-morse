@@ -1,13 +1,8 @@
 package br.pro.hashi.ensino.desagil.morse;
 
-
-import android.provider.Settings;
-import android.widget.Toast;
-
 import java.util.List;
 
 public class MorseTree {
-    private SendActivity send;
     private String[] treeToMorse = {null,"e","t","i","a","n","m","s","u","r","w","d","k","g","o",
                                         "h","v","f",null,"l",null,"p","j","b","x","c","y","z","q",
                                         null,null,"5","4",null,"3","é",null,null,"2",null,null,

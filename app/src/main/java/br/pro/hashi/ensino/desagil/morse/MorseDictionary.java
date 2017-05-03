@@ -1,11 +1,6 @@
 package br.pro.hashi.ensino.desagil.morse;
 
-/**
- * Created by Filipe Borba on 02/05/2017.
- */
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -22,7 +17,7 @@ public class MorseDictionary {
             null,",",null,null,null,null,":",null,null,null,null,null,null,
             null};
 
-    public String decode(String morseCodeString) {
+    public String romanToMorse(String morseCodeString) {
         Node[] nodes = new Node[127];
 
         for (int i = 0; i < treeToMorse.length; i++){
@@ -35,32 +30,31 @@ public class MorseDictionary {
 
         Node root = nodes[0];
         Stack<Node> stack = new Stack<>();
-        String morseEncode = "";
+        String morseDecode = "";
         stack.push(root);
 
         while(!stack.isEmpty()) {
             Node node = stack.peek();
             Node left = node.getLeft();
             Node right = node.getRight();
-            if (morseEncode.equals(morseCodeString)) {
-                System.out.println(node.getCharacter() + " " + morseEncode);
-                String decodedCharacter = node.getCharacter();
-                return decodedCharacter;
+            if (morseDecode.equals(morseCodeString)) {
+                System.out.println(node.getCharacter() + " " + morseDecode);
+                return node.getCharacter();
             }
             if(left != null && left.isOpen()) {
-                morseEncode = morseEncode + ".";
+                morseDecode = morseDecode + ".";
                 left.setOpen(false);
                 stack.push(left);
             }
             else if(right != null && right.isOpen()) {
-                morseEncode = morseEncode + "-";
+                morseDecode = morseDecode + "-";
                 right.setOpen(false);
                 stack.push(right);
             }
             else {
                 stack.pop();
-                if (!morseEncode.isEmpty()){
-                    morseEncode = morseEncode.substring(0, (morseEncode.length() - 1));
+                if (!morseDecode.isEmpty()){
+                    morseDecode = morseDecode.substring(0, (morseDecode.length() - 1));
                 }
             }
         }
