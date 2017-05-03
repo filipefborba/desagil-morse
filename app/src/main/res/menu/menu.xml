@@ -5,6 +5,6 @@
     android:title="Roman to Morse"
     app:showAsAction="never"/>;
 <item android:id="@+id/morseToRomanMenu"
-        android:title="Morse to Roman"
-        app:showAsAction="never" />
+    android:title="Morse to Roman"
+    app:showAsAction="never" />
 </menu>

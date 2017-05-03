@@ -20,6 +20,7 @@ import android.widget.Toast;
 import android.os.Vibrator;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,12 +45,26 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     List<String> morseToTextList = new ArrayList<>();
     MorseTree morseTree = new MorseTree();
     MorseDictionary morseDictionary = new MorseDictionary();
+    private EditText morseDictionaryList;
+    private ScrollView morseDictionaryMenu;
     int delay = 1500;
     boolean times = false;
     Timer timer = new Timer();
     Vibrator vibrator;
     public final int PICK_CONTACT = 2015;
     private String numero;
+
+    public void romanToMorsePrint(){
+        morseDictionary = new MorseDictionary();
+        String[] morseToTree = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+                "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.",
+                "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-",
+                "-.--", "--..", ".----", "..---", "...--", "....-", ".....",
+                "-....", "--...", "---..", "----.", "-----"};
+        for (int i = 0; i < morseToTree.length; i++){
+            morseDictionaryList.append(morseDictionary.decode(morseToTree[i])+ " " + morseToTree[i] + "\n");
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,24 +74,23 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        EditText romanToMorseEdit = (EditText) findViewById(R.id.morseToRomanList);
-        ScrollView romanToMorseEdit1 = (ScrollView) findViewById(R.id.morseToRomanList1);
-        String[] morseToTree = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
-                "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.",
-                "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-",
-                "-.--", "--..", ".----", "..---", "...--", "....-", ".....",
-                "-....", "--...", "---..", "----.", "-----"};
+        morseDictionaryList = (EditText) findViewById(R.id.morseDictionaryList);
+        morseDictionaryMenu = (ScrollView) findViewById(R.id.morseDictionaryMenu);
 
-        for (int i = 0; i < morseToTree.length; i++){
-            romanToMorseEdit.append(morseDictionary.decode(morseToTree[i])+ " " + morseToTree[i] + "\n");
-        }
 
-        int id = item.getItemId();
-        if (id == R.id.romanToMorseButton) {
-            romanToMorseEdit1.setVisibility(View.VISIBLE);
+        if (item.getItemId() == R.id.romanToMorseButton) {
+            morseDictionaryList.setText("");
+            romanToMorsePrint();
+            morseDictionaryMenu.setVisibility(View.VISIBLE);
+            morseDictionaryList.setVisibility(View.VISIBLE);
+            morseDictionaryList.requestFocus();
             return true;
+        } else {
+            morseDictionaryMenu.setVisibility(View.VISIBLE);
+            morseDictionaryList.setVisibility(View.VISIBLE);
+            morseDictionaryList.requestFocus();
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -94,6 +108,10 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         morse = (ImageButton) findViewById(R.id.morse);
         button_ready.setOnClickListener(this);
         morse.setOnTouchListener(this);
+
+        //Dictionary listener
+        morseDictionaryList = (EditText) findViewById(R.id.morseDictionaryList);
+        morseDictionaryList.setOnClickListener(this);
 
         //Ready messages buttons and their listeners
         button2 = (Button) findViewById(R.id.button2);
@@ -143,7 +161,11 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     //Ready messages function
     public void onClick(View v) {
-
+        if (v.getId() == R.id.morseDictionaryList) {
+            morseDictionaryMenu.setVisibility(View.INVISIBLE);
+            morseDictionaryList.setVisibility(View.INVISIBLE);
+            turn = true;
+        }
         if (!turn) {
             ready.setVisibility(View.VISIBLE);
             morse.setVisibility(View.INVISIBLE);
