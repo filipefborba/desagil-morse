@@ -62,7 +62,20 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 "-.--", "--..", ".----", "..---", "...--", "....-", ".....",
                 "-....", "--...", "---..", "----.", "-----"};
         for (int i = 0; i < morseToTree.length; i++){
-            morseDictionaryList.append(morseDictionary.decode(morseToTree[i])+ " " + morseToTree[i] + "\n");
+            morseDictionaryList.append(morseDictionary.decode(morseToTree[i])+ " = " + morseToTree[i] + "\n");
+        }
+    }
+
+    public void morseToRomanPrint(){
+        morseDictionary = new MorseDictionary();
+        String[] morseToTree = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+                "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.",
+                "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-",
+                "-.--", "--..", ".----", "..---", "...--", "....-", ".....",
+                "-....", "--...", "---..", "----.", "-----"};
+        List<String> roman = morseDictionary.morseToRoman();
+        for (int j = 0; j < roman.size(); j++){
+            morseDictionaryList.append(" " + roman.get(j)+"\n");
         }
     }
 
@@ -86,6 +99,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             morseDictionaryList.requestFocus();
             return true;
         } else {
+            morseDictionaryList.setText("");
+            morseToRomanPrint();
             morseDictionaryMenu.setVisibility(View.VISIBLE);
             morseDictionaryList.setVisibility(View.VISIBLE);
             morseDictionaryList.requestFocus();

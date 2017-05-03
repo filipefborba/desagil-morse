@@ -1,5 +1,6 @@
 package br.pro.hashi.ensino.desagil.morse;
 
+
 public class Node {
     private boolean open;
     private String character;
@@ -8,13 +9,15 @@ public class Node {
     private Node parent;
 
 
+
     public Node(String character, Node left, Node right) {
         open = true;
         this.character = character;
         this.left = left;
         this.right = right;
-        this.parent= null;
+        this.parent = null;
     }
+
 
     public void print() {
         if (left != null) {
@@ -54,7 +57,21 @@ public class Node {
     public Node getParent() {
         return parent;
     }
-    public void SetParent(Node parent){
+
+    public void setLeft(Node left){
+        this.left = left;
+        if(left != null) {
+            left.setParent(this);
+        }
+    }
+    public void setRight(Node right){
+        this.right = right;
+        if(right != null) {
+            right.setParent(this);
+        }
+    }
+
+    public void setParent(Node parent){
         this.parent = parent;
     }
 }

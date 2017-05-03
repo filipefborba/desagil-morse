@@ -67,16 +67,24 @@ public class MorseDictionary {
         return "";
     }
 
-    public static LinkedList<String> romanToMorse(){
+    public LinkedList<String> morseToRoman(){
         Node[] nodes = new Node[127];
-
-
-        for (int i = 0; i < treeToMorse.length; i++){
+        for (int i = 0; i < treeToMorse.length; i++) {
             nodes[i] = new Node(treeToMorse[i], null, null);
+
+
         }
 
-        for(int i = nodes.length / 2 - 1; i >= 0; i--) {
-            nodes[i] = new Node(treeToMorse[i], nodes[2 * i + 1], nodes[2 * i + 2]);
+        for (int i = 0; i < nodes.length; i++) {
+            if (nodes[i] != null) {
+                if (2 * i + 1 < nodes.length) {
+                    nodes[i].setLeft(nodes[2 * i + 1]);
+                }
+                if (2 * i + 2 < nodes.length) {
+                    nodes[i].setRight(nodes[2 * i + 2]);
+                }
+            }
+
         }
 
         Node root = nodes[0];
@@ -102,9 +110,9 @@ public class MorseDictionary {
             } else {
                 Node actual_removed = queue.remove();
 
-                if (actual_removed.getValue() != null && actual_removed != root) {
+                if (actual_removed.getCharacter() != null && actual_removed != root) {
                     String codigo = "";
-                    String removed = actual_removed.getValue();
+                    String removed = actual_removed.getCharacter();
                     while (actual_removed != root) {
                         if (actual_removed.getParent().getLeft() == actual_removed) {
                             codigo = codigo + ".";
@@ -116,10 +124,8 @@ public class MorseDictionary {
                     String novocodigo = new StringBuilder(codigo).reverse().toString();
                     dicionario.add(novocodigo + "  =  " + removed);
                 }
-
             }
         }
         return dicionario;
     }
-
 }
